@@ -1,27 +1,69 @@
+:root {
+    --accent: rgba(10,10,10,50%);
+    --bgcolor: rgb(197, 231, 235)
+}
+
 * {
     margin: 0;
     padding: 0px;
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1em;
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+}
 
 #cards {
     display: grid;
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 50px;
     padding: 50px;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     height: 250px;
     align-items: stretch;
-    justify-content: center;
-    padding: 10px;
-    border: 2px solid darkblue;
+    padding: 20px;
     border-radius: 20px;
-    background-color: cadetblue;
-    color: white;
+    background-color: var(--bgcolor);
+    color: var(--accent);
+    box-shadow: 0.1em 0.1em 0.1em 0.1em var(--accent);
+    font-size: 1.5rem;
+    width: 250px;
+}
 
+.field_name {
+    font-weight: bold;
+}
+
+.read {
+    grid-area: 4 / 1 / 5 / 3;
+}
+
+button {
+    border-radius: 20px;
+    color: var(--bgcolor);
+    background-color: var(--accent);
+    box-shadow: 0.1em 0.1em 0.1em 0.1em var(--accent);
+    width: 8em;
+    align-self: center;
+}
+
+dialog {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 50px;
+    margin: auto;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0.1em 0.1em 0.1em 0.1em var(--accent);
+}
+
+h5 {
+    padding-bottom: 50px;
 }
