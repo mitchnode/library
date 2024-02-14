@@ -5,6 +5,7 @@ const addButton = document.getElementById("addBook");
 addButton.addEventListener("click", (e) => {
     e.preventDefault();
     const dialog = document.createElement("dialog");
+    dialog.id = "addDialog";
     const heading = document.createElement("h5");
     heading.textContent = "Add a book to the library";
 
@@ -45,10 +46,10 @@ addButton.addEventListener("click", (e) => {
         const author = authorInput.value;
         const pages = pagesInput.value;
         const read = readInput.checked;
-        console.log(title,author,pages,read);
         addBookToLibrary(title,author,pages,read);
-        dialog.close();
-    })
+        getBooks();
+        dialog.remove();
+    });
 
     dialog.appendChild(heading);
     dialog.appendChild(titleSpan);
@@ -82,6 +83,7 @@ function Book(title, author, pages, read){
     }
     this.generateCard = function() {
         const card = document.createElement("div");
+        
         card.className = "card";
         cards.appendChild(card);
         const titletext = document.createElement("p");
@@ -92,6 +94,16 @@ function Book(title, author, pages, read){
         const authorspan = document.createElement("span");
         const pagespan = document.createElement("span");
         const readspan = document.createElement("span");
+        const deleteButton = document.createElement("button");
+        deleteButton.id = "delete";
+        deleteButton.textContent = "Delete";
+        card.id = myLibrary.map(e => e.title).indexOf(title);
+
+        deleteButton.addEventListener("click", (e) => {
+            myLibrary.splice(card.id, 1);
+            getBooks();
+        })
+
         titlespan.className = "field_name";
         authorspan.className = "field_name";
         pagespan.className = "field_name";
@@ -111,15 +123,18 @@ function Book(title, author, pages, read){
         card.appendChild(pagestext);
         card.appendChild(readspan);
         readspan.appendChild(readtext);
+        card.appendChild(deleteButton);
     }
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    myLibrary.push(new Book(title, author, pages, read));
+    const book = new Book(title, author, pages, read)
+    myLibrary.push(book);
 }
 
 function getBooks() {
     // Need to clear books to refresh them
+    cards.innerHTML = "";
     myLibrary.forEach(book => {
           book.generateCard();
     });

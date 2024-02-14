@@ -25,7 +25,7 @@
 .card {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    height: 250px;
+    
     align-items: stretch;
     padding: 20px;
     border-radius: 20px;
@@ -66,4 +66,10 @@ dialog {
 
 h5 {
     padding-bottom: 50px;
+}
+
+#delete {
+    grid-area: 5 / 1 / 6 / 3;
+    justify-self: center;
+    width: 6em;
 }
