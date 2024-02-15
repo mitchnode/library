@@ -25,7 +25,7 @@
 .card {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    
+    gap: 10px;
     align-items: stretch;
     padding: 20px;
     border-radius: 20px;
@@ -33,15 +33,17 @@
     color: var(--accent);
     box-shadow: 0.1em 0.1em 0.1em 0.1em var(--accent);
     font-size: 1.5rem;
-    width: 250px;
+    width: 300px;
+    height: 300px;
 }
 
 .field_name {
     font-weight: bold;
 }
 
-.read {
+.read_flag {
     grid-area: 4 / 1 / 5 / 3;
+    justify-self: center;
 }
 
 button {
@@ -69,7 +71,15 @@ h5 {
 }
 
 #delete {
-    grid-area: 5 / 1 / 6 / 3;
+    grid-area: 5 / 1 / 6 / 2;
     justify-self: center;
     width: 6em;
+    font-size: 0.8em;
+}
+
+#read {
+    grid-area: 5 / 2 / 6 / 3;
+    justify-self: center;
+    width: 6em;
+    font-size: 0.8em;
 }

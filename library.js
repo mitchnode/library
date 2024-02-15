@@ -79,7 +79,7 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.readinfo = function() {
-        return ((read) ? "Read" : "Not Read Yet");
+        return ((this.read) ? "Read" : "Not Read Yet");
     }
     this.generateCard = function() {
         const card = document.createElement("div");
@@ -95,8 +95,11 @@ function Book(title, author, pages, read){
         const pagespan = document.createElement("span");
         const readspan = document.createElement("span");
         const deleteButton = document.createElement("button");
+        const readButton = document.createElement("button");
         deleteButton.id = "delete";
         deleteButton.textContent = "Delete";
+        readButton.id = "read";
+        readButton.textContent = "Read";
         card.id = myLibrary.map(e => e.title).indexOf(title);
 
         deleteButton.addEventListener("click", (e) => {
@@ -104,10 +107,25 @@ function Book(title, author, pages, read){
             getBooks();
         })
 
+        readButton.addEventListener("click", (e) => {
+            if(this.read){
+                this.read = false;
+                readtext.textContent = this.readinfo();
+                readButton.textContent = "Read";
+                console.log(myLibrary);
+            } else {
+                this.read = true;
+                readtext.textContent = this.readinfo();
+                readButton.textContent = "Unread";
+                console.log(myLibrary);
+            }
+        })
+
+
         titlespan.className = "field_name";
         authorspan.className = "field_name";
         pagespan.className = "field_name";
-        readspan.classList = "field_name read";
+        readspan.classList = "field_name read_flag";
         titlespan.textContent = "Title: ";
         authorspan.textContent = "Author: ";
         pagespan.textContent = "Pages: ";
@@ -124,6 +142,7 @@ function Book(title, author, pages, read){
         card.appendChild(readspan);
         readspan.appendChild(readtext);
         card.appendChild(deleteButton);
+        card.appendChild(readButton);
     }
 }
 
