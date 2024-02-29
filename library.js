@@ -73,15 +73,56 @@ addButton.addEventListener("click", (e) => {
 
 const myLibrary = [];
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.readinfo = function() {
-        return ((this.read) ? "Read" : "Not Read Yet");
+class Book {
+    constructor(title, author, pages, read) {
+        this._title = title;
+        this._author = author;
+        this._pages = pages;
+        this._read = read;
     }
-    this.generateCard = function() {
+
+    get read() {
+        return this._read;
+    }
+
+    set read(value) {
+        this._read = value;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(value) {
+        this._title = value;
+    }
+
+    get author() {
+        return this._author;
+    }
+
+    set author(value) {
+        this._author = value;
+    }
+
+    get pages() {
+        return this._pages;
+    }
+
+    set pages(value) {
+        this._pages = value;
+    }
+    
+    
+
+    
+   
+
+    addToLibrary() {
+        myLibrary.push(this);
+    }
+
+    generateCard() {
         const card = document.createElement("div");
         
         card.className = "card";
@@ -100,7 +141,7 @@ function Book(title, author, pages, read){
         deleteButton.textContent = "Delete";
         readButton.id = "read";
         readButton.textContent = "Read";
-        card.id = myLibrary.map(e => e.title).indexOf(title);
+        card.id = myLibrary.map(e => e.title).indexOf(this.title);
 
         deleteButton.addEventListener("click", (e) => {
             myLibrary.splice(card.id, 1);
@@ -110,12 +151,12 @@ function Book(title, author, pages, read){
         readButton.addEventListener("click", (e) => {
             if(this.read){
                 this.read = false;
-                readtext.textContent = this.readinfo();
+                readtext.textContent = this.read;
                 readButton.textContent = "Read";
                 console.log(myLibrary);
             } else {
                 this.read = true;
-                readtext.textContent = this.readinfo();
+                readtext.textContent = this.read;
                 readButton.textContent = "Unread";
                 console.log(myLibrary);
             }
@@ -132,7 +173,7 @@ function Book(title, author, pages, read){
         titletext.textContent = this.title;
         authortext.textContent = this.author;
         pagestext.textContent = this.pages;
-        readtext.textContent = this.readinfo();
+        readtext.textContent = ((this.read) ? "Read" : "Unread");
         card.appendChild(titlespan);
         card.appendChild(titletext);
         card.appendChild(authorspan);
@@ -147,8 +188,9 @@ function Book(title, author, pages, read){
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    const book = new Book(title, author, pages, read)
+    let book = new Book(title, author, pages, read)
     myLibrary.push(book);
+    console.log(book);
 }
 
 function getBooks() {
